@@ -1,0 +1,30 @@
+.nav-menu-container ul {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 10px;
+  min-width: 50%;
+  list-style: none;
+}
+
+.nav-menu-container a {
+  padding: 5px;
+  font-size: medium;
+  font-weight: bold;
+  color: gray;
+  border-bottom: 3px solid rgb(241, 236, 236);
+  margin-left: 10px;
+  cursor: pointer;
+  text-decoration: none;
+ 
+}
+.nav-menu-container a.active {
+   
+  padding: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+  padding: 5px;
+  font-size: medium;
+  font-weight: bold;
+  border-bottom: 3px solid red;
+ 
+}

@@ -1,0 +1,34 @@
+.google-icon{
+    background-color: white;
+    margin-right: 3px;
+    border-radius:30%;
+    padding: 3px;
+    padding-bottom: 5px;
+}
+.google-btn {
+  background-color: rgb(212, 45, 45);
+  border: none;
+}
+.google-btn:hover {
+  background-color: brown;
+  border: none;
+}
+
+.forgot-password-container  {
+    display: flex;
+    justify-content: space-between;
+    
+}
+@media screen and (max-width: 900px) {
+  .forgot-password-container{
+    flex-direction: column;
+    margin-top: 30px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .forgot-password-container{
+    flex-direction: row;
+    margin-top: 30px;
+  }
+}

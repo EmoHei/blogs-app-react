@@ -134,7 +134,7 @@ const AddEditBlog = ({user}) => { // user is declared in App.js
     navigate("/");
   };
   return (
-    <Container>
+    <Container style={{marginTop:'100px'}}>
       <h1 style={{ marginTop: '5%' }}>Create Blog</h1>
       <Form onSubmit={handleSubmit}>
         <Row>

@@ -9,7 +9,8 @@ import { Button, Card, CardGroup, Figure, Image } from "react-bootstrap";
 import { FaTrashAlt } from 'react-icons/fa';
 import { BiEdit } from 'react-icons/bi';
 
-const BlogSection = ({ blogs, user }) => {
+const BlogSection = ({ blogs, user, handleDelete }) => {
+    const userId = user?.uid
 
 
     return (
@@ -18,6 +19,7 @@ const BlogSection = ({ blogs, user }) => {
 
             <h3 style={{ marginBottom: '30px', padding: '20px', borderBottom: 'solid 2px grey' }}>Daily Blogs</h3>
             {blogs?.map((item) => (
+
                 <Card >
                     <Row style={{ display: 'flex' }}>
                         <Col className="col-img">
@@ -34,9 +36,9 @@ const BlogSection = ({ blogs, user }) => {
                             <Card.Text className="text-category" >
                                 {item.category}
                             </Card.Text>
-                            <Card.Title style={{ color: 'black', fontWeight: 'bold',fontSize:'30px' }}>{item.title}</Card.Title>
+                            <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '30px' }}>{item.title}</Card.Title>
                             <Card.Text>
-                                <span style={{ fontWeight: 'bold' }}> {item.author} </span> 
+                                <span style={{ fontWeight: 'bold' }}> {item.author} </span>
                                 - {item.timestamp.toDate().toDateString()}
                             </Card.Text>
 
@@ -46,12 +48,14 @@ const BlogSection = ({ blogs, user }) => {
 
                                 <Col >
                                     <Link to={`/detail/${item.id}`}>
-                                 <Button >Read More</Button>
-                                </Link>
+                                        <Button >Read More</Button>
+                                    </Link>
                                    
-                                </Col>
 
-                                <Col className="col-edit-trash">
+                                </Col>
+ {user?.uid && item.userId === user.uid && (
+
+                                         <Col className="col-edit-trash">
                                     <BiEdit
                                         name="edit"
                                         style={{ marginRight: '15px', cursor: 'pointer', color: 'rgb(80, 167, 243)', fontSize: '39px' }}
@@ -59,9 +63,11 @@ const BlogSection = ({ blogs, user }) => {
                                     <FaTrashAlt
                                         name="trash"
                                         style={{ cursor: 'pointer', color: 'rgb(194, 42, 42)', fontSize: '35px' }}
-
+                                        onClick={() => handleDelete(item.id)}
                                     />
                                 </Col>
+                                    )}
+                               
                             </Row>
 
 

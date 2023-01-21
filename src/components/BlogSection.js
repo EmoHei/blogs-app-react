@@ -10,77 +10,71 @@ import { FaTrashAlt } from 'react-icons/fa';
 import { BiEdit } from 'react-icons/bi';
 
 const BlogSection = ({ blogs, user, handleDelete }) => {
-    const userId = user?.uid
+   const userId = user?.uid
 
+return (
 
-    return (
+      <Container className="blog-section-container" >
 
-        <Container className="blog-section-container" >
+         <h3 style={{ marginBottom: '30px', padding: '20px', borderBottom: 'solid 2px grey' }}>Daily Blogs</h3>
+         {blogs?.map((item) => (
 
-            <h3 style={{ marginBottom: '30px', padding: '20px', borderBottom: 'solid 2px grey' }}>Daily Blogs</h3>
-            {blogs?.map((item) => (
+            <Card >
+               <Row style={{ display: 'flex' }}>
+                  <Col className="col-img">
 
-                <Card >
-                    <Row style={{ display: 'flex' }}>
-                        <Col className="col-img">
+                     <Image
+                        style={{ borderRadius: '10px' }}
+                        width={100}
+                        height={50}
+                        alt="171x180" src={item.imgUrl} fluid />
 
-                            <Image
-                                style={{ borderRadius: '10px' }}
-                                width={100}
-                                height={50}
-                                alt="171x180" src={item.imgUrl} fluid />
+                  </Col>
 
-                        </Col>
+                  <Col className="col-content">
 
-                        <Col className="col-content">
-                            <Card.Text className="text-category" >
-                                {item.category}
-                            </Card.Text>
-                            <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '30px' }}>{item.title}</Card.Title>
-                            <Card.Text>
-                                <span style={{ fontWeight: 'bold' }}> {item.author} </span>
-                                - {item.timestamp.toDate().toDateString()}
-                            </Card.Text>
+                     <Card.Text className="text-category" >
+                        {item.category}
+                     </Card.Text>
+                     <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '30px' }}>{item.title}</Card.Title>
+                     <Card.Text>
+                        <span style={{ fontWeight: 'bold' }}> {item.author} </span>
+                        - {item.timestamp.toDate().toDateString()}
+                     </Card.Text>
 
+                     {excerpt(item.description, 50)}
+                     <Row className="row-btn">
 
-                            {excerpt(item.description, 120)}
-                            <Row className="row-btn">
+                        <Col >
+                           <Link to={`/detail/${item.id}`}>
+                              <Button >Read More</Button>
+                           </Link>
+                       </Col>
+                        {user?.uid && item.userId === user.uid && (
 
-                                <Col >
-                                    <Link to={`/detail/${item.id}`}>
-                                        <Button >Read More</Button>
-                                    </Link>
-                                   
+                           <Col className="col-edit-trash">
+                              <Link to={`/update/${item.id}`}>
+                                 <BiEdit
+                                    name="edit"
+                                    style={{ marginRight: '15px', cursor: 'pointer', color: 'rgb(80, 167, 243)', fontSize: '39px' }}
+                                 />
+                              </Link>
 
-                                </Col>
- {user?.uid && item.userId === user.uid && (
+                              <FaTrashAlt
+                                 name="trash"
+                                 style={{ cursor: 'pointer', color: 'rgb(194, 42, 42)', fontSize: '35px' }}
+                                 onClick={() => handleDelete(item.id)}
+                              />
+                           </Col>
+                        )}
 
-                                         <Col className="col-edit-trash">
-                                    <BiEdit
-                                        name="edit"
-                                        style={{ marginRight: '15px', cursor: 'pointer', color: 'rgb(80, 167, 243)', fontSize: '39px' }}
-                                    />
-                                    <FaTrashAlt
-                                        name="trash"
-                                        style={{ cursor: 'pointer', color: 'rgb(194, 42, 42)', fontSize: '35px' }}
-                                        onClick={() => handleDelete(item.id)}
-                                    />
-                                </Col>
-                                    )}
-                               
-                            </Row>
+                     </Row>
 
-
-                        </Col>
-                    </Row>
-                </Card>
-
-            ))}
-        </Container>
-
-
-    )
-
-
+                  </Col>
+               </Row>
+            </Card>
+         ))}
+      </Container>
+ )
 };
 export default BlogSection;

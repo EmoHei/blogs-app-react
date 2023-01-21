@@ -2,8 +2,11 @@
   position: sticky;
   max-height: 100px;
   top: 0;
- /* z-index: 20; */
+ z-index: 20;
  background-color: aliceblue;
+}
+.navbar .container{
+  max-height: 200px;
 }
 
 .nav-menu-container ul {

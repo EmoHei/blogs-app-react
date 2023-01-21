@@ -22,7 +22,7 @@ import SpinnerComp from "../components/SpinnerComp";
 import { toast } from "react-toastify";
 
 
-const Home = ({setActive ,user}) => {
+const Home = ({ setActive, user }) => {
 
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
@@ -47,12 +47,11 @@ const Home = ({setActive ,user}) => {
     }
 
   }, []);
-  if (loading){
+  if (loading) {
     return <SpinnerComp></SpinnerComp>
   }
 
-//  DELETE
- 
+  //  DELETE
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure wanted to delete that blog ?")) {
       try {
@@ -84,8 +83,6 @@ const Home = ({setActive ,user}) => {
             <Row>
               <h2>Most Popular</h2>
             </Row>
-
-
           </Col>
         </Row>
       </Container>

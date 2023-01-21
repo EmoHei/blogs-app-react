@@ -40,10 +40,6 @@
    color: white;
 }
 
-@media screen and (max-width: 1000px) {
-
- }
-
 .row-btn{ 
    align-items: center;
 }

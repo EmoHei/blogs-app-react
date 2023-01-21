@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import ReactTagInput from "@pathofdev/react-tag-input";//Used for "tags" and must be install
 import "@pathofdev/react-tag-input/build/index.css";
 import { db, storage } from "../firebase";
+import { useNavigate, useParams } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import {
-  addDoc,
-  collection,
-  getDoc,
-  serverTimestamp,
-  doc,
-  updateDoc,
-  onSnapshot,
-} from "firebase/firestore";
+import { addDoc, collection, getDoc, serverTimestamp, doc, updateDoc, onSnapshot, } from "firebase/firestore";
+
 import { toast } from "react-toastify";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import FormCheck from 'react-bootstrap/FormCheck'
@@ -37,7 +30,7 @@ const categoryOption = [
   "Business",
 ];
 
-const AddEditBlog = ({user}) => { // user is declared in App.js
+const AddEditBlog = ({ user, setActive }) => { // user is declared in App.js
   const [form, setForm] = useState(initialState);
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState(null);
@@ -85,6 +78,21 @@ const AddEditBlog = ({user}) => { // user is declared in App.js
     file && uploadFile();
   }, [file]);
 
+  useEffect(() => {
+    id && getBlogDetail();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+  const getBlogDetail = async () => {
+    const docRef = doc(db, "blogs", id);
+    const snapshot = await getDoc(docRef);
+    if (snapshot.exists()) {
+      setForm({ ...snapshot.data() });
+    }
+    setActive(null);
+  };
+
+  console.log("form",form);
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -127,15 +135,15 @@ const AddEditBlog = ({user}) => { // user is declared in App.js
         }
       }
     } else {
-  
       return toast.error("All fields are mandatory to fill");
     }
-
     navigate("/");
   };
+
+
   return (
-    <Container style={{marginTop:'100px'}}>
-      <h1 style={{ marginTop: '5%' }}>Create Blog</h1>
+    <Container style={{ marginTop: '100px' }}>
+      <h1 style={{ marginTop: '5%' }}>{id? "Update Blog" : "Create Blog"}</h1>
       <Form onSubmit={handleSubmit}>
         <Row>
 
@@ -227,8 +235,8 @@ const AddEditBlog = ({user}) => { // user is declared in App.js
           type="submit"
           disabled={progress !== null && progress < 100}
         >
-       Submit
-          </Button>
+        {id ? "Update" : "Submit"}
+        </Button>
 
       </Form>
 

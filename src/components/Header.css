@@ -1,3 +1,10 @@
+.navbar{
+  position: sticky;
+  max-height: 100px;
+  top: 0;
+ z-index: 20;
+ background-color: aliceblue;
+}
 .nav-menu-container ul {
   display: flex;
   justify-content: space-between;
@@ -27,4 +34,7 @@
   font-weight: bold;
   border-bottom: 3px solid red;
  
+}
+#responsive-navbar-nav{
+
 }

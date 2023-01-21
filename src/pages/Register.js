@@ -49,8 +49,9 @@ export default function Register() {
             delete formDataCopy.password;
             delete formDataCopy.confirmPassword;
             formDataCopy.timestamp = serverTimestamp();
-            await setDoc(doc(db, "users", user.uid), formDataCopy);
-            // Alert success Msg -usually we don't do that !!!
+            // set colection in db
+            // await setDoc(doc(db, "users", user.uid), formDataCopy);
+
             toast.success('Registration was successful')
             navigate('/');
         } catch (error) {
@@ -110,6 +111,9 @@ export default function Register() {
                                     onChange={onChange}
 
                                 />
+                                <Form.Text className="text-muted">
+                                    We'll never share your email with anyone else.
+                                </Form.Text>
                             </FloatingLabel>
 
                             <div className="password-container">

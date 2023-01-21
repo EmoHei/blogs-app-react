@@ -12,7 +12,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 
 
-const Header = () => {
+const Header = ({ active, setActive, user, handleLogout }) => {
     const [isLogged, setIsLogged] = useState(false);
     const [profileName, setProfileName] = useState('')
     const navigate = useNavigate();
@@ -29,7 +29,10 @@ const Header = () => {
     }, [auth])
 
     function onLogout() {
-        auth.signOut();
+        auth.signOut(auth).then(()=>{
+            setProfileName(null)
+            navigate('/')
+        });
 
     }
     return (
@@ -52,7 +55,7 @@ const Header = () => {
                         {isLogged && <NavLink to='/create' >Create</NavLink>}
                     </Nav>
                     <Nav className="nav-menu-container " >
-                        {isLogged && (
+                        { isLogged && (
 
 
                             <div className="profile-logo">
@@ -68,7 +71,7 @@ const Header = () => {
                                 />
                             </div>
                         )}
-                        {isLogged && <NavLink to='/profile' >Profile</NavLink>}
+                        {isLogged && <NavLink to='/profile' >Hello {profileName}</NavLink>}
                         {isLogged && <NavLink to='/logout' onClick={onLogout} > Logout</NavLink>}
 
                         {!isLogged && <NavLink to='/register'>Register</NavLink>}

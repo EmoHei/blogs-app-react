@@ -1,0 +1,21 @@
+.home-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px;
+   margin-top: 50px;
+}
+.row-header-title{
+    margin-top: 50px;
+}
+.blog-col{
+    width: 60%;
+}
+.tags-col{
+    width: 38%;
+}
+@media screen and (max-width:993px){
+   .row-header-title{
+    margin-top: 200px;
+} 
+}
